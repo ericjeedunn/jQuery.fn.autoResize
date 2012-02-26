@@ -188,11 +188,14 @@
 						cloneWidth + config.extraSpace : config.minWidth,
 					currentWidth = el.width();
 
-				newWidth = Math.min(newWidth, config.maxWidth);
+				if (config.maxWidth) {
+					newWidth = Math.min(newWidth, config.maxWidth);
+				}
 
 				if (
 					(newWidth < currentWidth && newWidth >= config.minWidth) ||
-					(newWidth >= config.minWidth && newWidth <= config.maxWidth)
+					(newWidth >= config.minWidth &&
+					 config.maxWidth ? newWidth <= config.maxWidth : true)
 				) {
 
 					config.onBeforeResize.call(el);
@@ -228,7 +231,7 @@
 
 			this.previousScrollTop = scrollTop;
 			
-			if (scrollTop + config.extraSpace >= config.maxHeight) {
+			if (config.maxHeight && scrollTop + config.extraSpace >= config.maxHeight) {
 				el.css('overflowY', '');
 				scrollTop = config.maxHeight;
 				immediate = true;
