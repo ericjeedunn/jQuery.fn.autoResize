@@ -172,7 +172,8 @@
 			var config = this.config,
 				clone = this.clone,
 				el = this.el,
-				value = el.val();
+				// try HTML5 placeholder when value is empty
+				value = el.val() || el.attr('placeholder') || '';
 
 			// Do nothing if value hasn't changed
 			if (value === this.prevValue) { return true; }
