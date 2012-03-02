@@ -109,16 +109,15 @@
 
 		bind: function() {
 
-			var check = $.proxy(function(){
-				this.check();
+			var check = $.proxy(function(e){
+				this.check(e);
 				return true;
 			}, this);
 
 			this.unbind();
 
 			this.el
-				.bind('keyup.autoResize', check)
-				//.bind('keydown.autoResize', check)
+				.bind('keyup.autoResize keydown.autoResize keypress.autoResize', check)
 				.bind('change.autoResize', check)
 				.bind('paste.autoResize', function() {
 					setTimeout(function() { check(); }, 0);
@@ -174,6 +173,11 @@
 				el = this.el,
 				// try HTML5 placeholder when value is empty
 				value = el.val() || el.attr('placeholder') || '';
+
+			// fix for <input> to work properly without extraSpace
+			if (e && e.type !== 'keyup' && printable(e)) {
+				value += String.fromCharCode(e.which);
+			}
 
 			// Do nothing if value hasn't changed
 			if (value === this.prevValue) { return true; }
@@ -272,4 +276,31 @@
 
 	};
 	
+	// Taken from http://github.com/documentcloud/visualsearch/blob/master/lib/js/utils/hotkeys.js#L74
+	// Check a key from an event and match it against any known characters.
+	// The `keyCode` is different depending on the event type: `keydown` vs. `keypress`.
+	//
+	// These were determined by looping through every `keyCode` and `charCode` that
+	// resulted from `keydown` and `keypress` events and counting what was printable.
+	var printable = function(e) {
+		var code = e.which;
+		if (e.type == 'keydown') {
+			if (code == 32 ||                      // space
+				(code >= 48 && code <= 90) ||      // 0-1a-z
+				(code >= 96 && code <= 111) ||     // 0-9+-/*.
+				(code >= 186 && code <= 192) ||    // ;=,-./^
+				(code >= 219 && code <= 222)) {    // (\)'
+			return true;
+			}
+		} else {
+			// [space]!"#$%&'()*+,-.0-9:;<=>?@A-Z[\]^_`a-z{|} and unicode characters
+			if ((code >= 32 && code <= 126)  ||
+				(code >= 160 && code <= 500) ||
+				(String.fromCharCode(code) == ":")) {
+			return true;
+			}
+		}
+		return false;
+	};
+
 })(jQuery);
