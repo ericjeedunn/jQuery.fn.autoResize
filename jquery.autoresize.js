@@ -22,6 +22,7 @@
 				complete: function(){}
 			},
 			extraSpace: 50,
+      resizeOnFocus: false,
 			minHeight: 'original',
 			maxHeight: 500,
 			minWidth: 'original',
@@ -123,6 +124,9 @@
 				.bind('paste.autoResize', function() {
 					setTimeout(function() { check(); }, 0);
 				});
+
+      if (this.config.resizeOnFocus)
+        this.el.bind('focus.autoResize', check);
 			
 			if (!this.el.is(':hidden')) {
 				this.check(null, true);
