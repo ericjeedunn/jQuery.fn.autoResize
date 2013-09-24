@@ -268,10 +268,12 @@
 
 		destroy: function() {
 			this.unbind();
-			this.el.removeData('AutoResizer');
-			this.clone.remove();
-			delete this.el;
-			delete this.clone;
+	            	this.el.removeData('AutoResizer');
+	            	if (this.clone){
+	                	this.clone.remove();
+	                	delete this.clone;
+	            	}
+    			delete this.el;
 		},
 
 		injectClone: function() {
