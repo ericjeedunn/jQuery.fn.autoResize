@@ -1,7 +1,7 @@
 /*
- * jQuery.fn.autoResize 1.14
+ * jQuery.fn.autoResize 1.15
  * --
- * https://github.com/padolsey/jQuery.fn.autoResize
+ * https://github.com/ericjeedunn/jQuery.fn.autoResize
  * --
  * This program is free software. It comes without any warranty, to
  * the extent permitted by applicable law. You can redistribute it
@@ -11,7 +11,7 @@
 
 (function($){
 
-	var uid = 'ar' + +new Date,
+	var uid = 'ar' + (+new Date),
 
 		defaults = autoResize.defaults = {
 			onResize: function(){},
@@ -22,7 +22,7 @@
 				complete: function(){}
 			},
 			extraSpace: 50,
-      resizeOnFocus: false,
+            resizeOnFocus: false,
 			minHeight: 'original',
 			maxHeight: 500,
 			minWidth: 'original',

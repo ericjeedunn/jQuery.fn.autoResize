@@ -60,3 +60,4 @@ Available options include:
  * `1.13.3` - [Issue 15](https://github.com/jamespadolsey/jQuery.fn.autoResize/issues/15) fixed.
  * `1.13.4` - [Issue 16](https://github.com/jamespadolsey/jQuery.fn.autoResize/issues/16) fixed.
  * `1.14` - Added `onBeforeResize` and `onAfterResize` callbacks (`onResize` is **deprecated** but still works). `.check()` now only runs when the value of the element has changed (avoids non-character-keys issue, e.g. CTRL+A). Initial `.check()` call is only done if the element is currently visible ([Issue 13](https://github.com/jamespadolsey/jQuery.fn.autoResize/issues/13)). If you're making an element visible and wish to trigger a resize, do `$(yourEl).data('AutoResizer').check()`.
+ * `1.15` - Allow Infinite Height and Width, option for autoexpand on focus, fixed destroy bug
