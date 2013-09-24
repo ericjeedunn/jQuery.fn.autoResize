@@ -24,6 +24,7 @@ Available options include:
  * `maxHeight`: (default: `500`) A number or the string `"original"` to signify the current height as the maxiumum (note: This option is only useful on `<textarea>` elements, i.e. elements that resize height-ways)
  * `onBeforeResize`: A callback function fired just before a resize occurs.
  * `onAfterResize`: A callback function fired just after a resize occurs.
+ * `resizeOnFocus`: (default: `"false"`) If true, then resize input field when field obtains focus.
  * `animate`: (default: `{duration: 200}`) Set to either `false` or an animation configuration object, i.e. the one passed as the second argument to `jQuery.fn.animate`. This signifies whether or not the element should animate when it resizes (set to `false` if you don't want animation).
 
  You can unbind listeners bound to by this plugin like so:
